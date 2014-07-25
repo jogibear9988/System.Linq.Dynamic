@@ -39,10 +39,12 @@ namespace System.Linq.Dynamic
         //    return ClassFactory.Instance.GetDynamicClass(properties);
         //}
 
+#if !NETFX_CORE
         public static Type CreateClass(IEnumerable<DynamicProperty> properties)
         {
             return ClassFactory.Instance.GetDynamicClass(properties);
         }
+#endif
     }
 
 }

@@ -32,9 +32,15 @@ namespace System.Linq.Dynamic
 
         static IEnumerable<Type> FindTypesMarkedWithAttribute()
         {
+#if !NETFX_CORE
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(x => x.GetTypes())
                 .Where(x => x.GetCustomAttributes(typeof(DynamicLinqTypeAttribute), false).Any());
+#else
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(x => x.DefinedTypes)
+                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(DynamicLinqTypeAttribute))).Select(x => x.BaseType);
+#endif
         }
     }
 }

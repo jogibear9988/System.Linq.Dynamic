@@ -12,6 +12,7 @@ namespace System.Linq.Dynamic
     /// </summary>
     public abstract class DynamicClass
     {
+#if !NETFX_CORE
         /// <summary>
         /// Returns a string that represents the current object.
         /// </summary>
@@ -31,5 +32,6 @@ namespace System.Linq.Dynamic
             sb.Append("}");
             return sb.ToString();
         }
+#endif
     }
 }

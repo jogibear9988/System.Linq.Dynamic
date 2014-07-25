@@ -1118,8 +1118,8 @@ public static void JoinEx1()
       <Description>Sorts the elements of a sequence in ascending order according to a key.</Description>
     </Expression>
 
-    <Expression name="OrderByDecending">
-      <Description>Sorts the elements of a sequence in decending order according to a key.</Description>
+    <Expression name="OrderByDescending">
+      <Description>Sorts the elements of a sequence in descending order according to a key.</Description>
     </Expression>
 
   </Expressions>
@@ -1154,6 +1154,32 @@ var result2 = baseQuery.Where("it % 2 = 0");</ExampleCode>
 All context keywords (`it`, `parent`, and `root`) can be disabled by setting `GlobalConfig`.[`AreContextKeywordsEnabled`][0] to `false`.
  
 [0]: /Library/GlobalConfig/Property-AreContextKeywordsEnabled</Remarks>
+      <Examples>
+        <Example>
+          <HeaderRemarks>The following example shows how to use the `parent` keyword.</HeaderRemarks>
+          <ExampleCode>
+            //Arrange
+            //Makes a Distinct By Tuple.Item1 but returns a full Tuple
+            var lst = new List&lt;Tuple&lt;int, int, int&gt;&gt;()
+            {
+                new Tuple&lt;int, int, int&gt;(1, 1, 1),
+                new Tuple&lt;int, int, int&gt;(1, 1, 2),
+                new Tuple&lt;int, int, int&gt;(1, 1, 3),
+                new Tuple&lt;int, int, int&gt;(2, 2, 4),
+                new Tuple&lt;int, int, int&gt;(2, 2, 5),
+                new Tuple&lt;int, int, int&gt;(2, 2, 6),
+                new Tuple&lt;int, int, int&gt;(2, 3, 7)
+            };
+
+            var p = lst.AsQueryable() as IQueryable;
+            var qry = p.GroupBy("Item1", "it").Select("it.Max(it.Item3)");
+
+            //Act
+            var qry1 = p.Where("@0.Any(it == parent.Item3)", qry);
+            var qry2 = p.Where("@0.Any($ == ^.Item3)", qry);
+          </ExampleCode>
+        </Example>
+      </Examples>
     </Keyword>
     
     <Keyword name="root">

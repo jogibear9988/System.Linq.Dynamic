@@ -1,5 +1,9 @@
 ﻿using System;
+#if !NETFX_CORE
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#else
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+#endif
 using System.Linq.Dynamic.Tests.Helpers;
 using System.Collections.Generic;
 

@@ -1,5 +1,9 @@
 ﻿using System;
+#if !NETFX_CORE
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#else
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+#endif
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Dynamic.Tests.Helpers;
@@ -15,7 +19,7 @@ namespace System.Linq.Dynamic.Tests
     [TestClass]
     public class InternalTests
     {
-#if !NET35
+#if !NET35 && !NETFX_CORE
         [TestMethod]
         public void ClassFactory_LoadTest()
         {
