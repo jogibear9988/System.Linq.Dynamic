@@ -15,14 +15,6 @@ namespace System.Linq.Dynamic
     {
         Dictionary<string, object> _properties = new Dictionary<string, object>();
 
-        //public DynamicClass(IEnumerable<KeyValuePair<string, object>> propertyValues)
-        //{
-        //    foreach (var pair in propertyValues)
-        //    {
-        //        _properties.Add(pair.Key, pair.Value);
-        //    }
-        //}
-
         public DynamicClass(KeyValuePair<string, object> _1)
         {
             _properties.Add(_1.Key, _1.Value);
@@ -47,6 +39,61 @@ namespace System.Linq.Dynamic
             _properties.Add(_2.Key, _2.Value);
             _properties.Add(_3.Key, _3.Value);
             _properties.Add(_4.Key, _4.Value);
+        }
+
+        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5)
+        {
+            _properties.Add(_1.Key, _1.Value);
+            _properties.Add(_2.Key, _2.Value);
+            _properties.Add(_3.Key, _3.Value);
+            _properties.Add(_4.Key, _4.Value);
+            _properties.Add(_5.Key, _5.Value);
+        }
+
+        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6)
+        {
+            _properties.Add(_1.Key, _1.Value);
+            _properties.Add(_2.Key, _2.Value);
+            _properties.Add(_3.Key, _3.Value);
+            _properties.Add(_4.Key, _4.Value);
+            _properties.Add(_5.Key, _5.Value);
+            _properties.Add(_6.Key, _6.Value);
+        }
+
+        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6, KeyValuePair<string, object> _7)
+        {
+            _properties.Add(_1.Key, _1.Value);
+            _properties.Add(_2.Key, _2.Value);
+            _properties.Add(_3.Key, _3.Value);
+            _properties.Add(_4.Key, _4.Value);
+            _properties.Add(_5.Key, _5.Value);
+            _properties.Add(_6.Key, _6.Value);
+            _properties.Add(_7.Key, _7.Value);
+        }
+
+        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6, KeyValuePair<string, object> _7, KeyValuePair<string, object> _8)
+        {
+            _properties.Add(_1.Key, _1.Value);
+            _properties.Add(_2.Key, _2.Value);
+            _properties.Add(_3.Key, _3.Value);
+            _properties.Add(_4.Key, _4.Value);
+            _properties.Add(_5.Key, _5.Value);
+            _properties.Add(_6.Key, _6.Value);
+            _properties.Add(_7.Key, _7.Value);
+            _properties.Add(_8.Key, _8.Value);
+        }
+
+        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6, KeyValuePair<string, object> _7, KeyValuePair<string, object> _8, KeyValuePair<string, object> _9)
+        {
+            _properties.Add(_1.Key, _1.Value);
+            _properties.Add(_2.Key, _2.Value);
+            _properties.Add(_3.Key, _3.Value);
+            _properties.Add(_4.Key, _4.Value);
+            _properties.Add(_5.Key, _5.Value);
+            _properties.Add(_6.Key, _6.Value);
+            _properties.Add(_7.Key, _7.Value);
+            _properties.Add(_8.Key, _8.Value);
+            _properties.Add(_9.Key, _9.Value);
         }
 
         public object this[string name]
@@ -90,6 +137,40 @@ namespace System.Linq.Dynamic
                 _properties.Add(name, value);
 
             return true;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("{");
+            foreach (var prp in _properties)
+            {
+                if (stringBuilder.Length > 1)
+                    stringBuilder.Append(", ");
+                stringBuilder.Append(prp.Key);
+                stringBuilder.Append("=");
+                stringBuilder.Append(prp.Value);
+            }
+            stringBuilder.Append("}");
+            return (stringBuilder).ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (object.ReferenceEquals(this, obj)) return true;
+
+            var other = obj as DynamicClass;
+
+            if (other == null) return false;
+
+            if (this._properties.Count != other._properties.Count)
+                return false;
+            return _properties.Keys.All(x => this[x].Equals(other[x]));
+        }
+
+        public override int GetHashCode()
+        {
+            return 0;
         }
     }
 }

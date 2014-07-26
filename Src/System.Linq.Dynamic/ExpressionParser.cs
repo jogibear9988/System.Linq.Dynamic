@@ -996,7 +996,7 @@ namespace System.Linq.Dynamic
             var constructorKeyValuePair = typeof(KeyValuePair<string, object>).GetTypeInfo().DeclaredConstructors.First();
             for (int i = 0; i < properties.Count; i++)
             {
-                var item = Expression.New(constructorKeyValuePair, new[] { (Expression)Expression.Constant(properties[i].Name), expressions[i] });
+                var item = Expression.New(constructorKeyValuePair, new[] { (Expression)Expression.Constant(properties[i].Name), Expression.Convert(expressions[i], typeof(object)) });
                 paras.Add(item);
             }
             var constructor = type.GetTypeInfo().DeclaredConstructors.First(x => x.GetParameters().Count() == properties.Count());
@@ -1136,6 +1136,12 @@ namespace System.Linq.Dynamic
                         return Expression.Constant(wr);
                 }
 
+#if NETFX_CORE
+                if (type == typeof(DynamicClass))
+                {
+                    return Expression.MakeIndex(instance, typeof(DynamicClass).GetProperty("Item"), new[] { Expression.Constant(id) });
+                }
+#endif
                 MemberInfo member = FindPropertyOrField(type, id, instance == null);
                 if (member == null)
                 {
@@ -1334,14 +1340,23 @@ namespace System.Linq.Dynamic
                 memberName = memberExpression.Member.Name;
                 return true;
             }
-//#if !NET35
-//            var dynamicExpression = expression as Expressions.DynamicExpression;
-//            if (dynamicExpression != null)
-//            {
-//                memberName = ((GetMemberBinder)dynamicExpression.Binder).Name;
-//                return true;
-//            }
-//#endif
+
+#if NETFX_CORE
+            var indexExpression = expression as IndexExpression;
+            if (indexExpression != null && indexExpression.Indexer.DeclaringType == typeof(DynamicClass))
+            {
+                memberName = ((ConstantExpression)indexExpression.Arguments.First()).Value as string;
+                return true;
+            }
+#endif
+            //#if !NET35
+            //            var dynamicExpression = expression as Expressions.DynamicExpression;
+            //            if (dynamicExpression != null)
+            //            {
+            //                memberName = ((GetMemberBinder)dynamicExpression.Binder).Name;
+            //                return true;
+            //            }
+            //#endif
 
             memberName = null;
             return false;
