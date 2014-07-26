@@ -20,34 +20,34 @@
   <Resources>
     <Resource Language="x-generate"/>
   </Resources>
-  
+
   <Applications>
-    <Application Id="vstest.executionengine.App" 
-        Executable="vstest.executionengine.appcontainer.exe" 
+    <Application Id="vstest.executionengine.App"
+        Executable="vstest.executionengine.appcontainer.exe"
         EntryPoint="vstest.executionengine.App">
-        <VisualElements 
-            DisplayName="NoUIEntryPoints"
-            Logo="Images\UnitTestLogo.png"
-            SmallLogo="Images\UnitTestSmallLogo.png"
-            Description="vstest.executionengine.App"
-            ForegroundText="light"
-            BackgroundColor="#0084FF">
-            <SplashScreen Image="Images\UnitTestSplashScreen.png" />
-        </VisualElements>
+      <VisualElements
+          DisplayName="NoUIEntryPoints"
+          Logo="Images\UnitTestLogo.png"
+          SmallLogo="Images\UnitTestSmallLogo.png"
+          Description="vstest.executionengine.App"
+          ForegroundText="light"
+          BackgroundColor="#0084FF">
+        <SplashScreen Image="Images\UnitTestSplashScreen.png" />
+      </VisualElements>
     </Application>
 
-    <Application Id="vstest.executionengine.x86.App" 
-        Executable="vstest.executionengine.appcontainer.x86.exe" 
+    <Application Id="vstest.executionengine.x86.App"
+        Executable="vstest.executionengine.appcontainer.x86.exe"
         EntryPoint="vstest.executionengine.x86.App">
-        <VisualElements 
-            DisplayName="NoUIEntryPoints"
-            Logo="Images\UnitTestLogo.png"
-            SmallLogo="Images\UnitTestSmallLogo.png"
-            Description="vstest.executionengine.x86.App"
-            ForegroundText="light"
-            BackgroundColor="#0084FF">
-            <SplashScreen Image="Images\UnitTestSplashScreen.png" />
-        </VisualElements>
+      <VisualElements
+          DisplayName="NoUIEntryPoints"
+          Logo="Images\UnitTestLogo.png"
+          SmallLogo="Images\UnitTestSmallLogo.png"
+          Description="vstest.executionengine.x86.App"
+          ForegroundText="light"
+          BackgroundColor="#0084FF">
+        <SplashScreen Image="Images\UnitTestSplashScreen.png" />
+      </VisualElements>
     </Application>
   </Applications>
   <Capabilities>

@@ -953,7 +953,6 @@ namespace System.Linq.Dynamic
 
         Expression ParseNew()
         {
-#if !NETFX_CORE
             NextToken();
             ValidateToken(TokenId.OpenParen, Res.OpenParenExpected);
             NextToken();
@@ -984,6 +983,7 @@ namespace System.Linq.Dynamic
             ValidateToken(TokenId.CloseParen, Res.CloseParenOrCommaExpected);
             NextToken();
 
+#if !NETFX_CORE
             Type type = DynamicExpression.CreateClass(properties);
 
             MemberBinding[] bindings = new MemberBinding[properties.Count];
@@ -991,7 +991,18 @@ namespace System.Linq.Dynamic
                 bindings[i] = Expression.Bind(type.GetProperty(properties[i].Name), expressions[i]);
             return Expression.MemberInit(Expression.New(type), bindings);
 #else
-            return null;
+            Type type = typeof(DynamicClass);
+            List<Expression> paras = new List<Expression>();
+            var constructorKeyValuePair = typeof(KeyValuePair<string, object>).GetTypeInfo().DeclaredConstructors.First();
+            for (int i = 0; i < properties.Count; i++)
+            {
+                var item = Expression.New(constructorKeyValuePair, new[] { (Expression)Expression.Constant(properties[i].Name), expressions[i] });
+                paras.Add(item);
+            }
+            var constructor = type.GetTypeInfo().DeclaredConstructors.First(x => x.GetParameters().Count() == properties.Count());
+            var instance = Expression.New(constructor, paras);
+
+            return instance;
 #endif
         }
 

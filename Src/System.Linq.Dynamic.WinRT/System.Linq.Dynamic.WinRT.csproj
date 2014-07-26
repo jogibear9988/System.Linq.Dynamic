@@ -104,9 +104,6 @@
     <Compile Include="..\System.Linq.Dynamic\BasicQueryable.cs">
       <Link>BasicQueryable.cs</Link>
     </Compile>
-    <Compile Include="..\System.Linq.Dynamic\DynamicClass.cs">
-      <Link>DynamicClass.cs</Link>
-    </Compile>
     <Compile Include="..\System.Linq.Dynamic\DynamicExpression.cs">
       <Link>DynamicExpression.cs</Link>
     </Compile>
@@ -144,6 +141,7 @@
       <Link>Res.cs</Link>
     </Compile>
     <Compile Include="AppDomain.cs" />
+    <Compile Include="DynamicClass.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

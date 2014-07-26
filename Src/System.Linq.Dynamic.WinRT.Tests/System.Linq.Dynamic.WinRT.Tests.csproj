@@ -109,8 +109,12 @@
   </PropertyGroup>
   <ItemGroup>
     <!--A reference to the entire .Net Framework and Windows SDK are automatically included-->
-    <SDKReference Include="MSTestFramework, Version=11.0" />
-    <SDKReference Include="TestPlatform, Version=11.0" />
+    <SDKReference Include="MSTestFramework, Version=14.0">
+      <Name>MSTest for Managed Projects</Name>
+    </SDKReference>
+    <SDKReference Include="TestPlatform, Version=14.0">
+      <Name>Microsoft Visual Studio Test Core</Name>
+    </SDKReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\System.Linq.Dynamic.Tests\BasicTests.cs">
@@ -136,9 +140,6 @@
     </Compile>
     <Compile Include="..\System.Linq.Dynamic.Tests\InternalTests.cs">
       <Link>InternalTests.cs</Link>
-    </Compile>
-    <Compile Include="..\System.Linq.Dynamic\DynamicLinqTypeProvider.cs">
-      <Link>DynamicLinqTypeProvider.cs</Link>
     </Compile>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
