@@ -39,7 +39,7 @@ namespace System.Linq.Dynamic
 #else
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(x => x.DefinedTypes)
-                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(DynamicLinqTypeAttribute))).Select(x => x.BaseType);
+                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(DynamicLinqTypeAttribute))).Select(x => x.AsType());
 #endif
         }
     }
