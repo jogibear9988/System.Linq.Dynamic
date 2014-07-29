@@ -983,15 +983,9 @@ namespace System.Linq.Dynamic
             ValidateToken(TokenId.CloseParen, Res.CloseParenOrCommaExpected);
             NextToken();
 
-#if !NETFX_CORE
-            Type type = DynamicExpression.CreateClass(properties);
 
-            MemberBinding[] bindings = new MemberBinding[properties.Count];
-            for (int i = 0; i < bindings.Length; i++)
-                bindings[i] = Expression.Bind(type.GetProperty(properties[i].Name), expressions[i]);
-            return Expression.MemberInit(Expression.New(type), bindings);
-#else
-            Type type = typeof(DynamicClass);
+#if NETFX_CORE
+            Type ttype = typeof(DynamicObjectClass);
             List<Expression> paras = new List<Expression>();
             var constructorKeyValuePair = typeof(KeyValuePair<string, object>).GetTypeInfo().DeclaredConstructors.First();
             for (int i = 0; i < properties.Count; i++)
@@ -999,10 +993,37 @@ namespace System.Linq.Dynamic
                 var item = Expression.New(constructorKeyValuePair, new[] { (Expression)Expression.Constant(properties[i].Name), Expression.Convert(expressions[i], typeof(object)) });
                 paras.Add(item);
             }
-            var constructor = type.GetTypeInfo().DeclaredConstructors.First(x => x.GetParameters().Count() == properties.Count());
-            var instance = Expression.New(constructor, paras);
+            var constructor = ttype.GetTypeInfo().DeclaredConstructors.First(x => x.GetParameters().Count() == properties.Count());
 
-            return instance;
+            return Expression.New(constructor, paras);
+#elif NET35 || SILVERLIGHT
+            Type type = DynamicExpression.CreateClass(properties);
+
+            MemberBinding[] bindings = new MemberBinding[properties.Count];
+            for (int i = 0; i < bindings.Length; i++)
+                bindings[i] = Expression.Bind(type.GetProperty(properties[i].Name), expressions[i]);
+            return Expression.MemberInit(Expression.New(type), bindings);
+#else
+            if (GlobalConfig.UseDynamicObjectClassForAnonymousTypes)
+            {
+                Type ttype = typeof(DynamicObjectClass);
+                List<Expression> paras = new List<Expression>();
+                var constructorKeyValuePair = typeof(KeyValuePair<string, object>).GetConstructors().First();
+                for (int i = 0; i < properties.Count; i++)
+                {
+                    var item = Expression.New(constructorKeyValuePair, new[] { (Expression)Expression.Constant(properties[i].Name), Expression.Convert(expressions[i], typeof(object)) });
+                    paras.Add(item);
+                }
+                var constructor = ttype.GetConstructors().First(x => x.GetParameters().Count() == properties.Count());
+
+                return Expression.New(constructor, paras);
+            }
+            Type type = DynamicExpression.CreateClass(properties);
+
+            MemberBinding[] bindings = new MemberBinding[properties.Count];
+            for (int i = 0; i < bindings.Length; i++)
+                bindings[i] = Expression.Bind(type.GetProperty(properties[i].Name), expressions[i]);
+            return Expression.MemberInit(Expression.New(type), bindings);
 #endif
         }
 
@@ -1137,9 +1158,9 @@ namespace System.Linq.Dynamic
                 }
 
 #if NETFX_CORE
-                if (type == typeof(DynamicClass))
+                if (type == typeof(DynamicObjectClass))
                 {
-                    return Expression.MakeIndex(instance, typeof(DynamicClass).GetProperty("Item"), new[] { Expression.Constant(id) });
+                    return Expression.MakeIndex(instance, typeof(DynamicObjectClass).GetProperty("Item"), new[] { Expression.Constant(id) });
                 }
 #endif
                 MemberInfo member = FindPropertyOrField(type, id, instance == null);
@@ -1343,7 +1364,7 @@ namespace System.Linq.Dynamic
 
 #if NETFX_CORE
             var indexExpression = expression as IndexExpression;
-            if (indexExpression != null && indexExpression.Indexer.DeclaringType == typeof(DynamicClass))
+            if (indexExpression != null && indexExpression.Indexer.DeclaringType == typeof(DynamicObjectClass))
             {
                 memberName = ((ConstantExpression)indexExpression.Arguments.First()).Value as string;
                 return true;

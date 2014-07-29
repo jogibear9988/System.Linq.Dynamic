@@ -53,5 +53,10 @@ namespace System.Linq.Dynamic
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool UseDynamicObjectClassForAnonymousTypes { get; set; }
     }
 }

@@ -8,32 +8,31 @@ using System.Text;
 namespace System.Linq.Dynamic
 {
     /// <summary>
-    /// Provides a base class for dynamic objects created by using the <see cref="DynamicQueryable.Select(IQueryable,string,object[])"/> 
-    /// method. For internal use only.
+    /// A DynamicClass as Replacement for creating classes via Reflection Emit, wich is not supported in WinRT
     /// </summary>
-    public class DynamicClass : DynamicObject
+    public class DynamicObjectClass : DynamicObject
     {
         Dictionary<string, object> _properties = new Dictionary<string, object>();
 
-        public DynamicClass(KeyValuePair<string, object> _1)
+        public DynamicObjectClass(KeyValuePair<string, object> _1)
         {
             _properties.Add(_1.Key, _1.Value);
         }
 
-        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2)
+        public DynamicObjectClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2)
         {
             _properties.Add(_1.Key, _1.Value);
             _properties.Add(_2.Key, _2.Value);
         }
 
-        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3)
+        public DynamicObjectClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3)
         {
             _properties.Add(_1.Key, _1.Value);
             _properties.Add(_2.Key, _2.Value);
             _properties.Add(_3.Key, _3.Value);
         }
 
-        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4)
+        public DynamicObjectClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4)
         {
             _properties.Add(_1.Key, _1.Value);
             _properties.Add(_2.Key, _2.Value);
@@ -41,7 +40,7 @@ namespace System.Linq.Dynamic
             _properties.Add(_4.Key, _4.Value);
         }
 
-        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5)
+        public DynamicObjectClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5)
         {
             _properties.Add(_1.Key, _1.Value);
             _properties.Add(_2.Key, _2.Value);
@@ -50,7 +49,7 @@ namespace System.Linq.Dynamic
             _properties.Add(_5.Key, _5.Value);
         }
 
-        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6)
+        public DynamicObjectClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6)
         {
             _properties.Add(_1.Key, _1.Value);
             _properties.Add(_2.Key, _2.Value);
@@ -60,7 +59,7 @@ namespace System.Linq.Dynamic
             _properties.Add(_6.Key, _6.Value);
         }
 
-        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6, KeyValuePair<string, object> _7)
+        public DynamicObjectClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6, KeyValuePair<string, object> _7)
         {
             _properties.Add(_1.Key, _1.Value);
             _properties.Add(_2.Key, _2.Value);
@@ -71,7 +70,7 @@ namespace System.Linq.Dynamic
             _properties.Add(_7.Key, _7.Value);
         }
 
-        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6, KeyValuePair<string, object> _7, KeyValuePair<string, object> _8)
+        public DynamicObjectClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6, KeyValuePair<string, object> _7, KeyValuePair<string, object> _8)
         {
             _properties.Add(_1.Key, _1.Value);
             _properties.Add(_2.Key, _2.Value);
@@ -83,7 +82,7 @@ namespace System.Linq.Dynamic
             _properties.Add(_8.Key, _8.Value);
         }
 
-        public DynamicClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6, KeyValuePair<string, object> _7, KeyValuePair<string, object> _8, KeyValuePair<string, object> _9)
+        public DynamicObjectClass(KeyValuePair<string, object> _1, KeyValuePair<string, object> _2, KeyValuePair<string, object> _3, KeyValuePair<string, object> _4, KeyValuePair<string, object> _5, KeyValuePair<string, object> _6, KeyValuePair<string, object> _7, KeyValuePair<string, object> _8, KeyValuePair<string, object> _9)
         {
             _properties.Add(_1.Key, _1.Value);
             _properties.Add(_2.Key, _2.Value);
@@ -159,7 +158,7 @@ namespace System.Linq.Dynamic
         {
             if (object.ReferenceEquals(this, obj)) return true;
 
-            var other = obj as DynamicClass;
+            var other = obj as DynamicObjectClass;
 
             if (other == null) return false;
 

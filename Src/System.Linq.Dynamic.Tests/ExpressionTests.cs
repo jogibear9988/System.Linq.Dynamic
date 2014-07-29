@@ -201,6 +201,26 @@ namespace System.Linq.Dynamic.Tests
             Assert.AreEqual(qry3.Count(), 2);
         }
 
+#if !SILVERLIGHT && !NETFX_CORE && !NET35
+        [TestMethod]
+        public void ExpressionTests_Convert()
+        {
+            List<int> range = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            var testList = User.GenerateSampleModels(100);
+            var qry = testList.AsQueryable();
+
+            var userFirstName = qry.Select("new (UserName, Profile.FirstName as MyFirstName)");
+            GlobalConfig.UseDynamicObjectClassForAnonymousTypes = true;
+            var userFirstName2 = qry.Select("new (UserName, Profile.FirstName as MyFirstName)");
+
+            var exp = ExpressionConverter.DynamicObjectClassToAnonymousType(userFirstName2.Expression);
+            var userFirstName3 = System.Linq.Expressions.Expression.Lambda(exp).Compile().DynamicInvoke();
+
+            Assert.AreEqual(userFirstName.Expression.ToString(), exp.ToString());
+            Assert.AreNotEqual(userFirstName2.Expression.ToString(), exp.ToString());
+        }
+#endif
+
         [TestMethod]
         public void ExpressionTests_ContextKeywordsAndSymbols()
         {

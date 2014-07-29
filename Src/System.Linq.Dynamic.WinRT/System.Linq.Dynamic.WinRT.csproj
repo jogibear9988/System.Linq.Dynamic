@@ -110,6 +110,9 @@
     <Compile Include="..\System.Linq.Dynamic\DynamicLinqTypeProvider.cs">
       <Link>DynamicLinqTypeProvider.cs</Link>
     </Compile>
+    <Compile Include="..\System.Linq.Dynamic\DynamicObjectClass.cs">
+      <Link>DynamicObjectClass.cs</Link>
+    </Compile>
     <Compile Include="..\System.Linq.Dynamic\DynamicOrdering.cs">
       <Link>DynamicOrdering.cs</Link>
     </Compile>
@@ -141,7 +144,6 @@
       <Link>Res.cs</Link>
     </Compile>
     <Compile Include="AppDomain.cs" />
-    <Compile Include="DynamicClass.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

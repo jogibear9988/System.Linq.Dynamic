@@ -60,9 +60,11 @@
     <Compile Include="DynamicClass.cs" />
     <Compile Include="DynamicExpression.cs" />
     <Compile Include="DynamicLinqTypeProvider.cs" />
+    <Compile Include="DynamicObjectClass.cs" />
     <Compile Include="DynamicQueryable.cs" />
     <Compile Include="DynamicOrdering.cs" />
     <Compile Include="DynamicProperty.cs" />
+    <Compile Include="ExpressionConverter.cs" />
     <Compile Include="ExpressionParser.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="GlobalSuppressions.cs" />
