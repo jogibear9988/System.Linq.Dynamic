@@ -16,7 +16,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Nathan Arnott")]
 [assembly: AssemblyProduct("System.Linq.Dynamic")]
 
-#if NET35
+#if SILVERLIGHT
+[assembly: AssemblyConfiguration("Silverlight")]
+[assembly: AssemblyDescription("Adds support for Dynamic Linq string expressions, rather than lambda expressions. For Silverlight.")]
+#elif NET35
 [assembly: AssemblyConfiguration("Net35")]
 [assembly: AssemblyDescription("Adds support for Dynamic Linq string expressions, rather than lambda expressions. For .Net 3.5 Framework.")]
 #else
