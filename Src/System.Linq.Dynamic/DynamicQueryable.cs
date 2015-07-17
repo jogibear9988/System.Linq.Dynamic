@@ -133,7 +133,7 @@ namespace System.Linq.Dynamic
         #region OrderBy
 
         /// <summary>
-        /// Sorts the elements of a sequence in ascending or decending order according to a key.
+        /// Sorts the elements of a sequence in ascending or descending order according to a key.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <param name="source">A sequence of values to order.</param>
@@ -145,13 +145,13 @@ namespace System.Linq.Dynamic
         /// var result = list.OrderBy("NumberProperty, StringProperty DESC");
         /// </code>
         /// </example>
-        public static IQueryable<TSource> OrderBy<TSource>(this IQueryable<TSource> source, string ordering, params object[] args)
+        public static IOrderedQueryable<TSource> OrderBy<TSource>(this IQueryable<TSource> source, string ordering, params object[] args)
         {
-            return (IQueryable<TSource>)OrderBy((IQueryable)source, ordering, args);
+            return (IOrderedQueryable<TSource>)OrderBy((IQueryable)source, ordering, args);
         }
 
         /// <summary>
-        /// Sorts the elements of a sequence in ascending or decending order according to a key.
+        /// Sorts the elements of a sequence in ascending or decsending order according to a key.
         /// </summary>
         /// <param name="source">A sequence of values to order.</param>
         /// <param name="ordering">An expression string to indicate values to order by.</param>
@@ -162,7 +162,7 @@ namespace System.Linq.Dynamic
         /// var result = list.OrderBy("NumberProperty, StringProperty DESC");
         /// </code>
         /// </example>
-        public static IQueryable OrderBy(this IQueryable source, string ordering, params object[] args)
+        public static IOrderedQueryable OrderBy(this IQueryable source, string ordering, params object[] args)
         {
             Validate.Argument(source, "source").IsNotNull().Check()
                     .Argument(ordering, "ordering").IsNotNull().IsNotEmpty().IsNotWhiteSpace().Check();
@@ -184,7 +184,7 @@ namespace System.Linq.Dynamic
                 methodAsc = "ThenBy";
                 methodDesc = "ThenByDescending";
             }
-            return source.Provider.CreateQuery(queryExpr);
+            return (IOrderedQueryable)source.Provider.CreateQuery(queryExpr);
         }
 
         #endregion

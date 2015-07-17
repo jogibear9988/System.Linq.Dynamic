@@ -114,15 +114,13 @@
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Class\" />
-    <Folder Include="Views\Site\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClassController.cs" />
+    <Compile Include="Controllers\HowTosController.cs" />
     <Compile Include="Controllers\LibraryController.cs" />
     <Compile Include="Controllers\ExpressionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -152,9 +150,19 @@
     <Compile Include="ViewModels\Method.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DynLINQDoc.xml">
+    <Content Include="App_Data\Classes\BasicQueryable.xml" />
+    <Content Include="App_Data\Classes\DefaultDynamicLinqCustomTypeProvider.xml" />
+    <Content Include="App_Data\Classes\DynamicLinqType.xml" />
+    <Content Include="App_Data\Classes\DynamicQueryable.xml" />
+    <Content Include="App_Data\Classes\GroupResult.xml" />
+    <Content Include="App_Data\Classes\IDynamicLinkCustomTypeProvider.xml" />
+    <Content Include="App_Data\Classes\ParseException.xml" />
+    <Content Include="App_Data\Classes\GlobalConfig.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\Expressions.xml" />
+    <Content Include="App_Data\Keywords.xml" />
+    <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\Browsers\browser_chrome.gif" />
     <Content Include="Content\Browsers\browser_firefox.gif" />
@@ -174,10 +182,9 @@
     <None Include="App_Data\DynLINQDoc.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\PublishProfiles\dynamiclinq - Web Deploy.pubxml" />
-    <Content Include="google7eb95bea483dc02b.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\dynamiclinq.pubxml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -213,6 +220,10 @@
     <Content Include="Views\Library\Property.cshtml" />
     <Content Include="Views\Expression\Keyword.cshtml" />
     <Content Include="Views\Home\GettingStarted.cshtml" />
+    <Content Include="Views\Shared\_PartialGoogleAnalytics.cshtml" />
+    <Content Include="Views\Home\Downloads.cshtml" />
+    <Content Include="Views\HowTos\EF6.cshtml" />
+    <Content Include="Views\HowTos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

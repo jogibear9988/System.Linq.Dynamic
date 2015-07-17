@@ -23,7 +23,7 @@ namespace System.Linq.Dynamic
         /// <summary>
         /// Returns a list of custom types that Dynamic Linq will understand.
         /// </summary>
-        public HashSet<Type> GetCustomTypes()
+        public virtual HashSet<Type> GetCustomTypes()
         {
             if (_customTypes == null) _customTypes = new HashSet<Type>(FindTypesMarkedWithAttribute());
 
@@ -34,6 +34,9 @@ namespace System.Linq.Dynamic
         {
 #if !NETFX_CORE
             return AppDomain.CurrentDomain.GetAssemblies()
+#if !NET35
+                .Where(x => !x.IsDynamic)
+#endif
                 .SelectMany(x => x.GetTypes())
                 .Where(x => x.GetCustomAttributes(typeof(DynamicLinqTypeAttribute), false).Any());
 #else
