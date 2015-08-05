@@ -406,7 +406,11 @@ namespace System.Linq.Dynamic
                         if (identifier.Type != right.Type) 
                         {
                             //check for nullable type match
+#if !NETFX_CORE
                             if (!identifier.Type.IsGenericType || identifier.Type.GetGenericTypeDefinition() != typeof(Nullable<>) || identifier.Type.GetGenericArguments()[0] != right.Type)
+#else
+                            if (!identifier.Type.IsGenericType() || identifier.Type.GetGenericTypeDefinition() != typeof(Nullable<>) || identifier.Type.GetGenericArguments()[0] != right.Type)
+#endif
                             {
                                 throw ParseError(op.pos, Res.ExpressionTypeMismatch, identifier.Type);
                             }
